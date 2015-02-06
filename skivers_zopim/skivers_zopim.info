@@ -1,0 +1,6 @@
+name = Zopim
+description = Zopim functionality
+;dependencies[] =
+package = SKIVERS
+version = "7.x-0.1"
+core = 7.x

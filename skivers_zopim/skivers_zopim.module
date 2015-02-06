@@ -1,0 +1,46 @@
+<?php
+
+/*
+  @author surf
+ * */
+
+define('SKIVERS_ZOPIM_ADMIN', 'admin/config/skivers/skivers_zopim');
+
+function skivers_zopim_menu()
+{
+
+    $items[SKIVERS_ZOPIM_ADMIN] = array(
+        'title' => 'Zopim Live Chat',
+        'description' => 'Zopim Live Chat',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('skivers_zopim_admin'),
+        'access arguments' => array('administer skivers_zopim_admin module'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function skivers_zopim_init()
+{
+    drupal_add_js("skivers_zopim_code ='" . variable_get('skivers_zopim_code', 'Error Code') . "';", array('type' => 'inline', 'scope' => 'header'));
+    drupal_add_js(drupal_get_path('module', 'skivers_zopim') . '/js/skivers_zopim.js', array('scope' => 'footer'));
+//    drupal_add_css(drupal_get_path('module', 'skivers_zopim') . '/css/skivers_zopim.css');
+}
+
+function skivers_zopim_admin()
+{
+    $form = array();
+
+    $form['skivers_zopim_title'] = array(
+    );
+    $form['skivers_zopim_code'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter Your Code'),
+        '#default_value' => variable_get('skivers_zopim_code', 'Enter Your Code'),
+        '#size' => 60,
+        '#maxlength' => 125,
+        '#description' => t(""),
+        '#required' => TRUE,
+    );
+    return system_settings_form($form);
+}
